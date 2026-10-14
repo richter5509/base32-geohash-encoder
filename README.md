@@ -34,3 +34,10 @@ The trade-off is deliberately narrow scope. A single, well-tested alphabet and a
 - `decode(s: str) -> tuple[int, int]` — returns `(value, bits_consumed)`.
 - `encode_bits(bits: str, length: int) -> str`
 - `decode_bits(s: str) -> str`
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
